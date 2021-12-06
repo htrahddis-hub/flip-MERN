@@ -5,13 +5,12 @@ require('dotenv').config();
 
 const router = express.Router();
 
-router.post(
-  '/signup',
-  passport.authenticate('signup', { session: false }),
-  async (req, res, next) => {
-    res.json({
+router.post('/signup',passport.authenticate('signup', { session: false }),
+  async (req, res) => {
+    console.log(req);
+    res.status(200).json({
       message: 'Signup successful',
-      user: req.user
+      user: req.body
     });
   }
 );
