@@ -1,7 +1,7 @@
 import React from 'react';
 import "./navbar.css";
 //import 'bootstrap/dist/css/bootstrap.min.css';
-import { Navbar, NavbarBrand,NavbarToggler,Nav,NavItem,NavLink,NavbarText,Collapse,DropdownItem,DropdownToggle,DropdownMenu,UncontrolledDropdown } from 'reactstrap';
+import { Navbar, NavbarBrand,NavbarToggler,Nav,NavItem,NavLink,Collapse } from 'reactstrap';
 
 
 const NavBar =()=>{
