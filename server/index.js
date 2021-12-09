@@ -27,11 +27,11 @@ app.use(function(err, req, res, next) {
 });
 
 app.get('/',(req,res) =>{
-	res.send("Hello to Memories API");
+	res.send("Hello to jwtAPI");
 });
 
 app.post('/signup', function(req, res){
-  console.log(req.body);
+  //console.log(req.body);
   res.json(req.body).status(200);
 })
 

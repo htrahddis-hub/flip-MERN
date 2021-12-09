@@ -6,10 +6,15 @@ router.get(
   (req, res, next) => {
     res.json({
       message: 'You made it to the secure route',
-      user: req.user,
+      user: {...req.user, password:null},
       token: req.query.secret_token
     })
   }
 );
+router.get('/products',(req,res,next)=>{
+  res.json({
+    products:"we don't haveproducts"
+  })
+})
 
 module.exports = router;
