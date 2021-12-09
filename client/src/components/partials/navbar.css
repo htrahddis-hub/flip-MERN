@@ -2,9 +2,14 @@
     font-size: 5.5vh;
 }
 .changep{
-    font-size: 3.5vh;
+    font-size: 3.4vh;
 }
 .changewhole{
+    margin-bottom: 1px;
     padding-bottom: 0px;
     padding-top: 0px;
+}
+.highlight{
+    font-size: 3.5vh;
+    border-bottom: solid 3px;
 }

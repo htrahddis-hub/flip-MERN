@@ -1,26 +1,15 @@
 //import logo from './logo.svg';
 import './App.css';
 import React from 'react';
-import Login from "./components/login.jsx";
-//import axios from 'axios';
+import SigLogPage from './components/Login/SigLogPage.jsx';
+import { BrowserRouter } from "react-router-dom";
 
 function App() {
-
-  // const d=3;
-  // useEffect(()=>{
-  //   const user = {
-  //     email: "siddharth@gmai.com",
-  //     password: "pass"
-  //   }
-    
-  //   var {data} = axios.post('http://localhost:5000/api/signup',user);
-  //   console.log(data);
-  //   //var {data} = axios.post('http://localhost:5000/signup',user);
-  // },[d]);
-
   return (
     <div className="App">
-      <Login/>
+       <BrowserRouter>
+      <SigLogPage/>
+      </BrowserRouter>
     </div>
   );
 }

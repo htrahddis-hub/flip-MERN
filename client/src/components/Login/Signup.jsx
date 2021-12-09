@@ -1,18 +1,20 @@
 import React from "react";
 import "./login.css";
-import Navbar from "./partials/navbar.jsx";
 import { Form,FormGroup,Input,Label,Button } from 'reactstrap';
+import { useLocation } from "react-router-dom";
 import axios from 'axios';
+import Navbar from '../partials/navbar';
 
-
-const Login= (props) =>{
+const Signup= () =>{
 
 	const [user, setUser]=React.useState({
 		email:"",
 		password:""
 	});
-
+	const [err,setErr] =React.useState(true);
+	const [log,setLog] =React.useState(true);
 	const handleChange=(event)=>{
+		setErr(true);
 		const {name,value}=event.target;
 		setUser((prevUser)=>{
 			return{
@@ -24,9 +26,13 @@ const Login= (props) =>{
 
 	const handleSubmit= (event)=>{
 		console.log(user);
-    axios.post('http://localhost:5000/api/login',user).then((res)=> {
-			console.log(res.data.token);
-		})
+    axios.post('http://localhost:5000/api/signup',user).then((res)=> {
+			console.log(res);
+			setLog(false);
+		}).catch(function (error) {
+			console.log(error);
+			setErr(false);
+		  });
 		event.preventDefault();
 		setUser({
 			email:'',
@@ -35,9 +41,10 @@ const Login= (props) =>{
 	}
   return(
     <div >
-			<Navbar/>
+			<Navbar path={useLocation()}/>
 			<div className="box">
   			<Form inline >
+				{log || <p className="err">Thanks for signing up login<a href="/Login">here</a></p>}
     			<FormGroup floating>
       			<Input
         			id="exampleEmail"
@@ -51,7 +58,6 @@ const Login= (props) =>{
         			Email
       			</Label>
     			</FormGroup>
-    			{' '}
     			<FormGroup floating>
       			<Input
         			id="examplePassword"
@@ -65,9 +71,9 @@ const Login= (props) =>{
         			Password
       			</Label>
     			</FormGroup>
-    			{' '}
+					{err || <p className="err">*This E-mail id is already registered</p>}
     			<Button onClick={handleSubmit} >
-      			Submit
+      			    Signup
     			</Button>
   			</Form>
 			</div>
@@ -75,4 +81,4 @@ const Login= (props) =>{
   )
 }
 
-export default Login;
+export default Signup;

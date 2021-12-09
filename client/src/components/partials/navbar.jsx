@@ -4,14 +4,16 @@ import "./navbar.css";
 import { Navbar, NavbarBrand,NavbarToggler,Nav,NavItem,NavLink,Collapse } from 'reactstrap';
 
 
-const NavBar =()=>{
+const NavBar =(props)=>{
+  const path=props.path.pathname;
+  console.log(path);
   return(
     <div>
   <Navbar
     color="dark"
     dark
     expand="md"
-    fixed="top"
+    fixed=""
     className="changewhole"
   >
     <NavbarBrand className='change' href="/">
@@ -24,42 +26,21 @@ const NavBar =()=>{
         navbar
       >
         <NavItem>
-          <NavLink className='changep' href="/">
+          <NavLink className={ path==="/" ? 'highlight' : 'changep' } href="/">
+            <b>Home</b>
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink className={ path==="/Login" ? 'highlight' : 'changep' } href="/Login">
             Login
           </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink className='changep' href="/">
-            Register
+          <NavLink className={ path==="/Signup" ? 'highlight' : 'changep' } href="/Signup">
+            Signup
           </NavLink>
         </NavItem>
-        {/* <UncontrolledDropdown
-          inNavbar
-          nav
-        >
-          <DropdownToggle
-            caret
-            nav
-          >
-            Options
-          </DropdownToggle>
-          <DropdownMenu right>
-            <DropdownItem>
-              Option 1
-            </DropdownItem>
-            <DropdownItem>
-              Option 2
-            </DropdownItem>
-            <DropdownItem divider />
-            <DropdownItem>
-              Reset
-            </DropdownItem>
-          </DropdownMenu>
-        </UncontrolledDropdown> */}
       </Nav>
-      {/* <NavbarText>
-        Simple Text
-      </NavbarText> */}
     </Collapse>
   </Navbar>
 </div>

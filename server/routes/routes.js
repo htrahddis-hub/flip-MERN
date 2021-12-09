@@ -36,8 +36,9 @@ router.post(
             async (error) => {
               if (error) return next(error);
 
-              const body = { _id: user._id, email: user.email };
-              const token = jwt.sign({ user: body }, process.env.TOP_SECRET);
+              const body = { _id: user._id, email: user.email,password:user.password };
+              const token = jwt.sign({ user: body }, process.env.TOP_SECRET, {
+                expiresIn: "60s"});
 
               return res.json({ token });
             }
