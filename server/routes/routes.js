@@ -1,8 +1,14 @@
 const express = require('express');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
+const UserModel = require('../model/model');
+const { totp } =require('otplib');
+const nodemailer = require("nodemailer");
 require('dotenv').config();
-
+totp.options = { 
+  digits: 6,
+  step: 300
+};
 const router = express.Router();
 
 router.post('/signup', function(req, res, next) {
@@ -25,14 +31,18 @@ router.post(
       async (err, user, info) => {
         try {
           if (err || !user) {
-            return res.json({info});
+            console.log(info.message);
+            return res.status(401).json(info);
           }
 
           req.login(
             user,
             { session: false },
             async (error) => {
-              if (error) return res.json({error});
+              if (error) {
+                console.log("hjd");
+                return next(error);
+              }
 
               const body = { _id: user._id, email: user.email,password:user.password };
               const token = jwt.sign({ user: body }, process.env.TOP_SECRET, {
@@ -47,5 +57,60 @@ router.post(
     )(req, res, next);
   }
 );
+
+router.post('/fpwd',async (req,res,next)=>{
+  try{
+    const { email } = req.body;
+    const user = await UserModel.findOne({ email }).lean();
+
+    if (!user) {
+      return res.status(550).json({ message: 'This email ID is not registered'});
+    }
+    const token = totp.generate(process.env.SECRET);
+    const html = `
+      <h3>Hello , </h3>
+      <p>Here is your OTP for resetting password of account ${email}.</p>
+      <p>Reset Link: ${token}</p>
+      <br/>
+      <p> If you didn't request this, please change your password, and check your account activity.</p>
+      <p>Thank You</p>
+      `
+
+    let mailTransporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'siddharthecomapp@gmail.com',
+        pass: process.env.PASS
+        }
+      });
+        
+    let mailDetails = {
+        from: 'no-reply siddharthecomapp@gmail.com',
+        to: email,
+        subject: 'Password Change',
+        html: html 
+      };
+        
+    await mailTransporter.sendMail(mailDetails);
+
+    return res.status(200).json({ message: "OTP is send"});
+  } catch (error) {
+    console.log(error);
+    return next(error);
+  }
+})
+
+router.post('/rpwd', async(req,res,next)=>{
+  try{
+    const {otp}=req.body;
+    console.log(otp);
+    const isValid = totp.check(otp, process.env.SECRET);
+    console.log(isValid);
+    if(isValid) return res.status(200).json({message:"verfied"});
+    return res.status(401).json({message:"not verified"});
+  } catch(error){
+    return next(error);
+  }
+})
 
 module.exports = router;

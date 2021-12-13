@@ -6,7 +6,6 @@ import { Navbar, NavbarBrand,NavbarToggler,Nav,NavItem,NavLink,Collapse } from '
 
 const NavBar =(props)=>{
   const path=props.path.pathname;
-  console.log(path);
   return(
     <div>
   <Navbar
@@ -33,11 +32,6 @@ const NavBar =(props)=>{
         <NavItem>
           <NavLink className={ path==="/Login" ? 'highlight' : 'changep' } href="/Login">
             Login
-          </NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink className={ path==="/Signup" ? 'highlight' : 'changep' } href="/Signup">
-            Signup
           </NavLink>
         </NavItem>
       </Nav>

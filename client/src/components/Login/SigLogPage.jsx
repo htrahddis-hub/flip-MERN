@@ -5,6 +5,8 @@ import Signup from './Signup';
 import Home from '../home/home';
 
 const SigLogPage= ()=>{
+  const [user, setUser]= React.useState(false);
+
   return (
     <div>
 			{/* <Navbar path={useLocation()}/> */}
@@ -12,6 +14,7 @@ const SigLogPage= ()=>{
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        {/* <Route path ="/auth/home" element={<>} */}
       </Routes>
     </div>
     )

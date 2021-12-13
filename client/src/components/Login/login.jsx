@@ -12,7 +12,7 @@ const Login= () =>{
 		email:"",
 		password:""
 	});
-	const [unauth,setUnauth] =React.useState(true);
+	const [unauth,setUnauth] =React.useState({message:""});
 	
 	const handleChange=(event)=>{
 		setUnauth(true);
@@ -30,9 +30,13 @@ const Login= () =>{
     axios.post('http://localhost:5000/api/login',user).then((res)=> {
 			console.log(res);
 			}).catch(function (error) {
-			console.log(error);
-			setUnauth(false);
-		  });
+				const msg=error.response.data.message;
+				setUnauth((prevUser)=>{
+					return{
+						message: msg
+					}
+				});
+			});
 		event.preventDefault();
 		setUser({
 			email:'',
@@ -71,7 +75,7 @@ const Login= () =>{
         			Password
       			</Label>
     			</FormGroup>
-				{unauth || <p className="unauth">*wrongpassword/id</p>}
+				{unauth? <p className="unauth">{unauth.message}</p>:<p></p>}
     			<Button onClick={handleSubmit} >
       			Login
     			</Button>

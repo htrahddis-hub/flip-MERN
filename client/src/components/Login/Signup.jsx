@@ -44,7 +44,7 @@ const Signup= () =>{
 			<Navbar path={useLocation()}/>
 			<div className="box">
   			<Form inline >
-				{log || <p className="err">Thanks for signing up login<a href="/Login">here</a></p>}
+				{log || <p className="err">Thanks for signing up login <a href="/Login">here</a></p>}
     			<FormGroup floating>
       			<Input
         			id="exampleEmail"

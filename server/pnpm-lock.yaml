@@ -8,7 +8,9 @@ specifiers:
   express: ^4.17.1
   jsonwebtoken: ^8.5.1
   mongoose: ^6.0.14
+  nodemailer: ^6.7.2
   nodemon: ^2.0.15
+  otplib: ^12.0.1
   passport: ^0.5.0
   passport-jwt: ^4.0.0
   passport-local: ^1.0.0
@@ -21,7 +23,9 @@ dependencies:
   express: 4.17.1
   jsonwebtoken: 8.5.1
   mongoose: 6.0.14
+  nodemailer: 6.7.2
   nodemon: 2.0.15
+  otplib: 12.0.1
   passport: 0.5.0
   passport-jwt: 4.0.0
   passport-local: 1.0.0
@@ -43,6 +47,39 @@ packages:
       tar: 6.1.11
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /@otplib/core/12.0.1:
+    resolution: {integrity: sha512-4sGntwbA/AC+SbPhbsziRiD+jNDdIzsZ3JUyfZwjtKyc/wufl1pnSIaG4Uqx8ymPagujub0o92kgBnB89cuAMA==}
+    dev: false
+
+  /@otplib/plugin-crypto/12.0.1:
+    resolution: {integrity: sha512-qPuhN3QrT7ZZLcLCyKOSNhuijUi9G5guMRVrxq63r9YNOxxQjPm59gVxLM+7xGnHnM6cimY57tuKsjK7y9LM1g==}
+    dependencies:
+      '@otplib/core': 12.0.1
+    dev: false
+
+  /@otplib/plugin-thirty-two/12.0.1:
+    resolution: {integrity: sha512-MtT+uqRso909UkbrrYpJ6XFjj9D+x2Py7KjTO9JDPhL0bJUYVu5kFP4TFZW4NFAywrAtFRxOVY261u0qwb93gA==}
+    dependencies:
+      '@otplib/core': 12.0.1
+      thirty-two: 1.0.2
+    dev: false
+
+  /@otplib/preset-default/12.0.1:
+    resolution: {integrity: sha512-xf1v9oOJRyXfluBhMdpOkr+bsE+Irt+0D5uHtvg6x1eosfmHCsCC6ej/m7FXiWqdo0+ZUI6xSKDhJwc8yfiOPQ==}
+    dependencies:
+      '@otplib/core': 12.0.1
+      '@otplib/plugin-crypto': 12.0.1
+      '@otplib/plugin-thirty-two': 12.0.1
+    dev: false
+
+  /@otplib/preset-v11/12.0.1:
+    resolution: {integrity: sha512-9hSetMI7ECqbFiKICrNa4w70deTUfArtwXykPUvSHWOdzOlfa9ajglu7mNCntlvxycTiOAXkQGwjQCzzDEMRMg==}
+    dependencies:
+      '@otplib/core': 12.0.1
+      '@otplib/plugin-crypto': 12.0.1
+      '@otplib/plugin-thirty-two': 12.0.1
     dev: false
 
   /@sindresorhus/is/0.14.0:
@@ -1068,6 +1105,11 @@ packages:
       whatwg-url: 5.0.0
     dev: false
 
+  /nodemailer/6.7.2:
+    resolution: {integrity: sha512-Dz7zVwlef4k5R71fdmxwR8Q39fiboGbu3xgswkzGwczUfjp873rVxt1O46+Fh0j1ORnAC6L9+heI8uUpO6DT7Q==}
+    engines: {node: '>=6.0.0'}
+    dev: false
+
   /nodemon/2.0.15:
     resolution: {integrity: sha512-gdHMNx47Gw7b3kWxJV64NI+Q5nfl0y5DgDbiVtShiwa7Z0IZ07Ll4RLFo6AjrhzMtoEZn5PDE3/c2AbVsiCkpA==}
     engines: {node: '>=8.10.0'}
@@ -1137,6 +1179,14 @@ packages:
     resolution: {integrity: sha1-WDsap3WWHUsROsF9nFC6753Xa9E=}
     dependencies:
       wrappy: 1.0.2
+    dev: false
+
+  /otplib/12.0.1:
+    resolution: {integrity: sha512-xDGvUOQjop7RDgxTQ+o4pOol0/3xSZzawTiPKRrHnQWAy0WjhNs/5HdIDJCrqC4MBynmjXgULc6YfioaxZeFgg==}
+    dependencies:
+      '@otplib/core': 12.0.1
+      '@otplib/preset-default': 12.0.1
+      '@otplib/preset-v11': 12.0.1
     dev: false
 
   /p-cancelable/1.1.0:
@@ -1475,6 +1525,11 @@ packages:
       minizlib: 2.1.2
       mkdirp: 1.0.4
       yallist: 4.0.0
+    dev: false
+
+  /thirty-two/1.0.2:
+    resolution: {integrity: sha1-TKL//AKlEpDSdEueP1V2k8prYno=}
+    engines: {node: '>=0.2.6'}
     dev: false
 
   /to-readable-stream/1.0.0:
