@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require("dotenv");
 const passport = require('passport');
-const routes = require('./routes/routes');
+const routes = require('./auth/routes/routes');
 
 require('./auth/auth');
 
@@ -15,11 +15,11 @@ app.use(bodyParser.json({ limit: "30mb", extended: true}));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true}));
 app.use(cors());
 app.use(passport.initialize());
-const UserModel = require('./model/model');
-app.use('/api/',routes);
+const UserModel = require('./model/userAuth');
+app.use('/auth/',routes);
 
-const secureRoute = require('./routes/secure-routes');
-app.use('/user', passport.authenticate('jwt', { session: false }), secureRoute);
+const secureRoute = require('./auth/routes/secure-routes');
+app.use('/user/', secureRoute);
 
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);

@@ -10,25 +10,26 @@ const UserSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true
+  },
+  validApi: {
+    type: [String]
   }
 });
 
-UserSchema.pre(
-    'save',
-    async function(next) {
-      const user = this;
-      const hash = await bcrypt.hash(this.password, 10);
-  
-      this.password = hash;
-      next();
-    }
-  );
+// UserSchema.pre(
+//     'save',
+//     async function(next) {
+//       const user = this;
+//       const hash = await bcrypt.hash(this.password, 10);
+//       this.password = hash;
+//       next();
+//     }
+//   );
   
 UserSchema.methods.isValidPassword = async (password,hash)=> {
-  //const user = this;
-  //console.log(this);
+  // const user = this;
+  // console.log(this);
   const compare = await bcrypt.compare(password, hash);
-
   return compare;
 }
 

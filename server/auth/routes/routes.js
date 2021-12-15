@@ -1,9 +1,11 @@
 const express = require('express');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
-const UserModel = require('../model/model');
+const UserModel = require('../../model/userAuth');
 const { totp } =require('otplib');
 const nodemailer = require("nodemailer");
+var AES = require("crypto-js/aes");
+const bcrypt = require('bcrypt');
 require('dotenv').config();
 totp.options = { 
   digits: 6,
@@ -40,14 +42,14 @@ router.post(
             { session: false },
             async (error) => {
               if (error) {
-                console.log("hjd");
                 return next(error);
               }
-
-              const body = { _id: user._id, email: user.email,password:user.password };
-              const token = jwt.sign({ user: body }, process.env.TOP_SECRET, {
-                expiresIn: "600s"});
-              return res.json({ ...body,token,password:null });
+              
+              const body = { email: user.email, token: user.validApi.slice(-1)};
+              // const token = jwt.sign({ user: body }, process.env.TOP_SECRET, {
+              //   expiresIn: "10h"});
+              // var safetoken = AES.encrypt(token, process.env.SECRET_KEY).toString();
+              return res.json({ body});
             }
           );
         } catch (error) {
@@ -102,15 +104,24 @@ router.post('/fpwd',async (req,res,next)=>{
 
 router.post('/rpwd', async(req,res,next)=>{
   try{
-    const {otp}=req.body;
-    console.log(otp);
-    const isValid = totp.check(otp, process.env.SECRET);
-    console.log(isValid);
-    if(isValid) return res.status(200).json({message:"verfied"});
+    const {otp,password,email}=req.body;
+    if(otp){
+      const isValid = totp.check(otp, process.env.SECRET);
+      console.log(isValid);
+      if(isValid){
+        const user = await UserModel.findOne({ email });
+        if (!user) return res.json({ message: 'invalid email ID'});
+        user.password = password;
+        await user.save();
+        return res.status(200).json({message:"verfied"});
+      }
     return res.status(401).json({message:"not verified"});
+    }
+    return res.status(401).json({message:"no OTP"});
   } catch(error){
     return next(error);
   }
 })
+
 
 module.exports = router;
