@@ -41,14 +41,11 @@ router.post(
             user,
             { session: false },
             async (error) => {
+              
               if (error) {
                 return next(error);
               }
-              
               const body = { email: user.email, token: user.validApi.slice(-1)};
-              // const token = jwt.sign({ user: body }, process.env.TOP_SECRET, {
-              //   expiresIn: "10h"});
-              // var safetoken = AES.encrypt(token, process.env.SECRET_KEY).toString();
               return res.json({ body});
             }
           );

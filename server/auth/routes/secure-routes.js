@@ -20,7 +20,7 @@ const router = express.Router();
 //   }
 // );
 
-router.get('/profile',(req,res,next)=>{
+router.post('/get-token', async (req,res,next)=>{
   try{
     const {secret_token}=req.body;
 
@@ -30,23 +30,35 @@ router.get('/profile',(req,res,next)=>{
     var decoded = jwt.verify(token, process.env.TOP_SECRET);
 
     if(decoded){
+      const token = jwt.sign({ user: decoded.user }, process.env.TOP_SECRET, {
+        expiresIn: "600s"});
       res.json({
         message: 'You made it to the secure route',
         user: decoded.user.email,
-        token: secret_token
+        token: token
       });
     }
     else res.json({message:"invalid-token"});
   }catch(error){
     //console.log(error);
-    next(error);
+    res.status(500).json({message:"invalid token",error:error});
   }
 });
 
 router.get('/products',(req,res,next)=>{
-  res.json({
-    products:"we don't haveproducts"
-  })
+  try{
+    const {token}=req.body;
+    var decoded = jwt.verify(token, process.env.TOP_SECRET);
+    if(decoded){
+      //const user=new UserModel.findOne()
+      res.json({
+        message:"correct token"
+      });
+    }
+    else res.json({message:"invalid token"});
+  } catch(error){
+    next(error);
+  }
 })
 
 module.exports = router;

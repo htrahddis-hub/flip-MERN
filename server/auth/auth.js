@@ -1,8 +1,8 @@
 const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
 const UserModel = require('../model/userAuth');
-const JWTstrategy = require('passport-jwt').Strategy;
-const ExtractJWT = require('passport-jwt').ExtractJwt;
+// const JWTstrategy = require('passport-jwt').Strategy;
+// const ExtractJWT = require('passport-jwt').ExtractJwt;
 var AES = require("crypto-js/aes");
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
@@ -45,12 +45,17 @@ passport.use(
         if (!validate) {
           return done(null, false, { message: 'Wrong Password' });
         }
+
         const body = { email: user.email};
+
         const token = jwt.sign({ user: body }, process.env.TOP_SECRET, {
           expiresIn: "10h"});
+
         var safetoken = AES.encrypt(token, process.env.SECRET_KEY).toString();
         user.validApi.push(safetoken);
+
         user.save();
+        
         return done(null, user, { message: 'Logged in Successfully' });
       } catch (error) {
         return done(error);
@@ -59,18 +64,3 @@ passport.use(
   )
 );
 
-// passport.use(
-//   new JWTstrategy(
-//     {
-//       secretOrKey: process.env.TOP_SECRET,
-//       jwtFromRequest: ExtractJWT.fromUrlQueryParameter('secret_token')
-//     },
-//     async (token, done) => {
-//       try {
-//         return done(null, token.user);
-//       } catch (error) {
-//         done(error);
-//       }
-//     }
-//   )
-// );

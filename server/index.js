@@ -5,6 +5,7 @@ const cors = require('cors');
 const dotenv = require("dotenv");
 const passport = require('passport');
 const routes = require('./auth/routes/routes');
+const cookieParser = require("cookie-parser");
 
 require('./auth/auth');
 
@@ -13,6 +14,7 @@ dotenv.config();
 
 app.use(bodyParser.json({ limit: "30mb", extended: true}));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true}));
+app.use(cookieParser());
 app.use(cors());
 app.use(passport.initialize());
 const UserModel = require('./model/userAuth');
@@ -28,6 +30,11 @@ app.use(function(err, req, res, next) {
 
 app.get('/',(req,res) =>{
 	res.send("Hello to jwtAPI");
+});
+
+app.get("/private", (req, res) => {
+  if (!req.cookies.token) return res.status(401).send();
+  res.status(200).json({ secret: "Ginger ale is a specific Root Beer" });
 });
 
 app.post('/signup', function(req, res){
