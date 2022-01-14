@@ -4,21 +4,6 @@ const UserModel = require('../../model/userAuth');
 require('dotenv').config();
 var CryptoJS = require("crypto-js");
 const router = express.Router();
-// router.get(
-//   '/profile',
-//   (req, res, next) => {
-//     passport.authenticate('jwt',(err,user,info)=>{
-//       if (err) { return next(err);}
-//       var decoded = jwt.verify(req.query.secret_token, process.env.TOP_SECRET);
-//       console.log(decoded);
-//       res.json({
-//         message: 'You made it to the secure route',
-//         user: {...req.user, password:null},
-//         token: req.query.secret_token
-//       })
-//     })(req, res, next);
-//   }
-// );
 
 router.post('/get-token', async (req,res,next)=>{
   try{
@@ -50,7 +35,6 @@ router.get('/products',(req,res,next)=>{
     const {token}=req.body;
     var decoded = jwt.verify(token, process.env.TOP_SECRET);
     if(decoded){
-      //const user=new UserModel.findOne()
       res.json({
         message:"correct token"
       });
@@ -59,6 +43,6 @@ router.get('/products',(req,res,next)=>{
   } catch(error){
     next(error);
   }
-})
+});
 
 module.exports = router;

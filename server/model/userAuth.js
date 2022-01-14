@@ -15,16 +15,6 @@ const UserSchema = new mongoose.Schema({
     type: [String]
   }
 });
-
-// UserSchema.pre(
-//     'save',
-//     async function(next) {
-//       const user = this;
-//       const hash = await bcrypt.hash(this.password, 10);
-//       this.password = hash;
-//       next();
-//     }
-//   );
   
 UserSchema.methods.isValidPassword = async (password,hash)=> {
   // const user = this;

@@ -97,7 +97,7 @@ router.post('/fpwd',async (req,res,next)=>{
     console.log(error);
     return next(error);
   }
-})
+});
 
 router.post('/rpwd', async(req,res,next)=>{
   try{
@@ -118,7 +118,7 @@ router.post('/rpwd', async(req,res,next)=>{
   } catch(error){
     return next(error);
   }
-})
+});
 
 
 module.exports = router;
