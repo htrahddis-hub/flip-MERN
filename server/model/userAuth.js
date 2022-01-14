@@ -12,7 +12,7 @@ const UserSchema = new mongoose.Schema({
     required: true
   },
   validApi: {
-    type: [String]
+    type: String
   }
 });
   

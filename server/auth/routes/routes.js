@@ -45,7 +45,7 @@ router.post(
               if (error) {
                 return next(error);
               }
-              const body = { email: user.email, token: user.validApi.slice(-1)};
+              const body = { email: user.email, token: user.validApi};
               return res.json({ body});
             }
           );

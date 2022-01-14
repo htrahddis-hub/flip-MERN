@@ -52,7 +52,7 @@ passport.use(
           expiresIn: "10h"});
 
         var safetoken = AES.encrypt(token, process.env.SECRET_KEY).toString();
-        user.validApi.push(safetoken);
+        user.validApi=safetoken;
 
         user.save();
         
