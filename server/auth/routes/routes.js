@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const UserModel = require('../../model/userAuth');
 const { totp } =require('otplib');
 const nodemailer = require("nodemailer");
-var AES = require("crypto-js/aes");
+var CryptoJS = require("crypto-js");
 const bcrypt = require('bcrypt');
 require('dotenv').config();
 totp.options = { 
@@ -119,6 +119,28 @@ router.post('/rpwd', async(req,res,next)=>{
     return next(error);
   }
 });
+
+router.post('/verify', async (req,res,next)=>{
+  try{
+    const {secret_token}=req.body;
+
+    var bytes  = CryptoJS.AES.decrypt(secret_token, process.env.SECRET_KEY);
+    var token = bytes.toString(CryptoJS.enc.Utf8);
+
+    var decoded = jwt.verify(token, process.env.TOP_SECRET);
+
+    if(decoded){
+      res.json({
+        message: 'ok',
+        user: decoded.user.email,
+      });
+    }
+    else res.json({message:"invalid-token"});
+  }catch(error){
+    res.status(500).json({message:"invalid token",error:error});
+  }
+});
+
 
 
 module.exports = router;
