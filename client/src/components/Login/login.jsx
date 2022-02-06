@@ -1,18 +1,18 @@
 import React from "react";
 import "./login.css";
 import { Form,FormGroup,Input,Label,Button } from 'reactstrap';
-import axios from 'axios';
 import Navbar from '../partials/navbar';
-import { useLocation } from "react-router-dom";
+import { useLocation,useNavigate } from "react-router-dom";
+import {login} from '../../api';
 
 
-const Login= () =>{
-
+const Login= (props) =>{
+	let navigate = useNavigate();
 	const [user, setUser]=React.useState({
 		email:"",
 		password:""
 	});
-	const [unauth,setUnauth] =React.useState({message:""});
+	const [unauth,setUnauth] =React.useState();
 	
 	const handleChange=(event)=>{
 		setUnauth(true);
@@ -25,19 +25,13 @@ const Login= () =>{
 		});
 	}
 
-	const handleSubmit= (event)=>{
-		console.log(user);
-    axios.post('http://localhost:5000/api/login',user).then((res)=> {
-			console.log(res);
-			}).catch(function (error) {
-				const msg=error.response.data.message;
-				setUnauth((prevUser)=>{
-					return{
-						message: msg
-					}
-				});
-			});
+	const handleSubmit= async (event)=>{
 		event.preventDefault();
+		console.log(user);
+		const message=await login(user);
+		if(message==='ok')
+			props.setUser({...user,auth:true});
+		setUnauth(message);
 		setUser({
 			email:'',
 			password:''
@@ -46,7 +40,6 @@ const Login= () =>{
   return(
     <div >
 			<Navbar path={useLocation()}/>
-			{/* <Navbar/> */}
 			<div className="box">
   			<Form inline >
     			<FormGroup floating>
@@ -75,13 +68,14 @@ const Login= () =>{
         			Password
       			</Label>
     			</FormGroup>
-				{unauth? <p className="unauth">{unauth.message}</p>:<p></p>}
+				{unauth? <p className="unauth">{unauth}</p>:<p></p>}
     			<Button onClick={handleSubmit} >
       			Login
     			</Button>
-					<Button className="pads" href="/Signup">
+					{unauth!="User not found" || <Button className="pads" href="/Signup">
       			New User
-    			</Button>
+    			</Button>}
+					
   			</Form>
 			</div>
     </div>

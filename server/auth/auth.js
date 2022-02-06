@@ -49,7 +49,7 @@ passport.use(
         const body = { email: user.email};
 
         const token = jwt.sign({ user: body }, process.env.TOP_SECRET, {
-          expiresIn: "10h"});
+          expiresIn: "480h"});
 
         var safetoken = AES.encrypt(token, process.env.SECRET_KEY).toString();
         user.validApi=safetoken;

@@ -2,8 +2,8 @@ import React from "react";
 import "./login.css";
 import { Form,FormGroup,Input,Label,Button } from 'reactstrap';
 import { useLocation } from "react-router-dom";
-import axios from 'axios';
 import Navbar from '../partials/navbar';
+import {signup} from '../../api';
 
 const Signup= () =>{
 
@@ -24,16 +24,13 @@ const Signup= () =>{
 		});
 	}
 
-	const handleSubmit= (event)=>{
-		console.log(user);
-    axios.post('http://localhost:5000/api/signup',user).then((res)=> {
-			console.log(res);
-			setLog(false);
-		}).catch(function (error) {
-			console.log(error);
-			setErr(false);
-		  });
+	const handleSubmit= async (event)=>{
 		event.preventDefault();
+    const flag=signup(user);
+		if(flag='ok')
+			setLog(false);
+		else
+			setErr(false);
 		setUser({
 			email:'',
 			password:''

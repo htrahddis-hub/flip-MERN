@@ -1,6 +1,4 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
-import Navbar from '../partials/navbar';
 import Products from './product/productCard';
 import './products.css';
 
@@ -28,11 +26,10 @@ var products=[
 const Product= ()=>{
   return (
     <div>
-      <Navbar path={useLocation()}/>
-        <div className="productGrid">  
-          <Products product={products[0]}/>
-          <Products product={products[0]}/>
-          <Products product={products[0]}/>
+      <div className="productGrid">  
+        <Products product={products[0]}/>
+        <Products product={products[0]}/>
+        <Products product={products[0]}/>
       </div>
     </div>
     )
