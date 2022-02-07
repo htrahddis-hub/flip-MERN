@@ -1,11 +1,18 @@
 import React from 'react';
 import "./navbar.css";
-//import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, NavbarBrand,NavbarToggler,Nav,NavItem,NavLink,Collapse } from 'reactstrap';
+import {logout} from '../../api';
+import { useNavigate } from "react-router-dom";
 
 
 const NavBar =(props)=>{
   const path=props.path.pathname;
+  const navigate= useNavigate();
+  const handleSubmit=async (event)=>{
+    event.preventDefault();
+    await logout();
+    props.setUser('not valid');
+  }
   return(
     <div>
   <Navbar
@@ -29,11 +36,15 @@ const NavBar =(props)=>{
             <b>Home</b>
           </NavLink>
         </NavItem>
-        <NavItem>
+        {props.user!="valid"? <NavItem>
           <NavLink className={ path==="/Login" ? 'highlight' : 'changep' } href="/Login">
             Login
           </NavLink>
-        </NavItem>
+        </NavItem>:<NavItem>
+          <NavLink className='changep' onClick={handleSubmit} href="/">
+            Logout
+          </NavLink>
+        </NavItem>}
       </Nav>
     </Collapse>
   </Navbar>

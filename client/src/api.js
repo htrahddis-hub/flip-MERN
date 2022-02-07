@@ -5,15 +5,15 @@ const url="https://data-and-auth-api.herokuapp.com/auth/";
 
 export const signup= async(user)=>{
 	try{
-		var flag;
 		const {data}=await axios.post(url+'signup',user);
+		console.log(data);
 		if(data.message=="Signup successful")
-			flag='ok';
+			return 'ok';
 	}
 	catch(err){
-		flag='not ok';
+		console.log(err.response);
+		return 'not ok';
 	}
-	return flag;
 }
 
 export const login= async(user)=>{
@@ -45,5 +45,14 @@ export const authorize= async()=>{
 	}
 	catch(err){
 		return err.response.data.message;
+	}
+}
+
+export const logout= async()=>{
+	try{
+		document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+	}
+	catch(err){
+		console.log(err);
 	}
 }

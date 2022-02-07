@@ -1,5 +1,5 @@
 import React from "react";
-import "./login.css";
+import "./Signup.css";
 import { Form,FormGroup,Input,Label,Button } from 'reactstrap';
 import { useLocation } from "react-router-dom";
 import Navbar from '../partials/navbar';
@@ -9,9 +9,10 @@ const Signup= () =>{
 
 	const [user, setUser]=React.useState({
 		email:"",
-		password:""
+		password:"",
+		confirmPassword:""
 	});
-	const [err,setErr] =React.useState(true);
+	const [err,setErr] =React.useState(' ');
 	const [log,setLog] =React.useState(true);
 	const handleChange=(event)=>{
 		setErr(true);
@@ -25,23 +26,29 @@ const Signup= () =>{
 	}
 
 	const handleSubmit= async (event)=>{
+		if(user.password===user.confirmPassword)
+		{
 		event.preventDefault();
-    const flag=signup(user);
-		if(flag='ok')
+    const flag= await signup({email:user.email,password:user.password});
+		if(flag=='ok')
 			setLog(false);
 		else
-			setErr(false);
+			setErr('This E-mail id is already registered');
 		setUser({
 			email:'',
-			password:''
+			password:'',
+			confirmPassword:''
 		});
+	}
+	else{
+		setErr('Passwords must match');
+	}
 	}
   return(
     <div >
 			<Navbar path={useLocation()}/>
 			<div className="box">
   			<Form inline >
-				{log || <p className="err">Thanks for signing up login <a href="/Login">here</a></p>}
     			<FormGroup floating>
       			<Input
         			id="exampleEmail"
@@ -68,10 +75,25 @@ const Signup= () =>{
         			Password
       			</Label>
     			</FormGroup>
-					{err || <p className="err">*This E-mail id is already registered</p>}
+					<FormGroup floating>
+      			<Input
+        			id="confirmPassword"
+        			name="confirmPassword"
+        			placeholder="Confirm Password"
+        			type="password"
+							value={user.confirmPassword}
+							onChange={handleChange}
+      			/>
+      			<Label for="confirmPassword">
+        			Confirm Password
+      			</Label>
+    			</FormGroup>
+					{log || <p className="error">Thanks for signing up!! login <a href="/Login">here</a></p>}
+					{err==' ' || <p className="error">{err}</p>}
     			<Button onClick={handleSubmit} >
-      			    Signup
+      			Signup
     			</Button>
+					<p className="error">Have an account? <a href="/Login">login</a></p>
   			</Form>
 			</div>
     </div>

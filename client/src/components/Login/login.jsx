@@ -41,7 +41,7 @@ const Login= (props) =>{
     <div >
 			<Navbar path={useLocation()}/>
 			<div className="box">
-  			<Form inline >
+  			<Form inline onKeyPress={event=>{if(event.key==="Enter") {handleSubmit(event)}}}>
     			<FormGroup floating>
       			<Input
         			id="exampleEmail"
@@ -69,12 +69,13 @@ const Login= (props) =>{
       			</Label>
     			</FormGroup>
 				{unauth? <p className="unauth">{unauth}</p>:<p></p>}
+				<p className="fpwd"><a href='/forgotpassword'>Forgot password?</a></p>
     			<Button onClick={handleSubmit} >
       			Login
     			</Button>
-					{unauth!="User not found" || <Button className="pads" href="/Signup">
-      			New User
-    			</Button>}
+					<Button className="pads" href="/Signup">
+      			New user?
+    			</Button>
 					
   			</Form>
 			</div>
