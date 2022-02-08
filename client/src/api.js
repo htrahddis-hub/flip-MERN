@@ -56,3 +56,23 @@ export const logout= async()=>{
 		console.log(err);
 	}
 }
+
+export const forgotPassword=async(user)=>{
+	try{
+		const data=await axios.post(url+'fpwd',user);
+		return data.data.message;
+	}
+	catch(err){
+		return err.response.data.message;
+	}
+}
+
+export const resetPassword=async(user)=>{
+	try{
+		const data= await axios.post(url+'rpwd',user);
+		return data.data.message;
+	}
+	catch(err){
+		return err.response.data.message;
+	}
+}

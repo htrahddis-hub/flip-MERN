@@ -14,12 +14,12 @@ const NavBar =(props)=>{
     props.setUser('not valid');
   }
   return(
-    <div>
+    <div >
   <Navbar
     color="dark"
     dark
     expand="md"
-    fixed=""
+    fixed="top"
     className="changewhole"
   >
     <NavbarBrand className='change' href="/">

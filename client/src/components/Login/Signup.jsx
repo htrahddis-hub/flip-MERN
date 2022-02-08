@@ -93,7 +93,7 @@ const Signup= () =>{
     			<Button onClick={handleSubmit} >
       			Signup
     			</Button>
-					<p className="error">Have an account? <a href="/Login">login</a></p>
+					<p className="acc">Have an account? <a href="/Login">login</a></p>
   			</Form>
 			</div>
     </div>
