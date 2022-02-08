@@ -2,12 +2,11 @@ import React from "react";
 import "./login.css";
 import { Form,FormGroup,Input,Label,Button } from 'reactstrap';
 import Navbar from '../partials/navbar';
-import { useLocation,useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import {login} from '../../api';
 
 
 const Login= (props) =>{
-	let navigate = useNavigate();
 	const [user, setUser]=React.useState({
 		email:"",
 		password:""

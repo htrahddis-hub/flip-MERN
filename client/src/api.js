@@ -7,7 +7,7 @@ export const signup= async(user)=>{
 	try{
 		const {data}=await axios.post(url+'signup',user);
 		console.log(data);
-		if(data.message=="Signup successful")
+		if(data.message==="Signup successful")
 			return 'ok';
 	}
 	catch(err){

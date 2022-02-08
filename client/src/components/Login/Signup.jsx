@@ -30,7 +30,7 @@ const Signup= () =>{
 		{
 		event.preventDefault();
     const flag= await signup({email:user.email,password:user.password});
-		if(flag=='ok')
+		if(flag==='ok')
 			setLog(false);
 		else
 			setErr('This E-mail id is already registered');
@@ -89,7 +89,7 @@ const Signup= () =>{
       			</Label>
     			</FormGroup>
 					{log || <p className="error">Thanks for signing up!! login <a href="/Login">here</a></p>}
-					{err==' ' || <p className="error">{err}</p>}
+					{err===' ' || <p className="error">{err}</p>}
     			<Button onClick={handleSubmit} >
       			Signup
     			</Button>

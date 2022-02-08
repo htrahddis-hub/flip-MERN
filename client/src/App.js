@@ -10,12 +10,12 @@ import {authorize} from './api';
 
 function App() {
   const [user,setUser]=React.useState('');
-  React.useEffect(async()=>{
+  React.useEffect(()=>{(async()=>{
     const data= await authorize();
     console.log(data);
     if(data==='ok')
       setUser('valid');
-  },[])
+  })()},[])
   const setuser=(user)=>{
     setUser('valid');
   }

@@ -78,7 +78,7 @@ const Signup= () =>{
         			Email
       			</Label>
     			</FormGroup>
-					{pwd=='' || <p className={otpsend?'logina':'loginb'}>{pwd}</p>}
+					{pwd==='' || <p className={otpsend?'logina':'loginb'}>{pwd}</p>}
 					{otpsend?<Button className="space" onClick={handleSubmit} >
       			Send OTP
     			</Button>:<Button className="space" onClick={handleSubmit} >
@@ -124,7 +124,7 @@ const Signup= () =>{
       			</Label>
     			</FormGroup>
 					{pass1||<p className="logina">Password donot match</p>}
-					{pass2==''||<p className="logina">{pass2}</p>}
+					{pass2===''||<p className="logina">{pass2}</p>}
 					<Button className="space" onClick={handleResetPassword} >
 					Verify
 				</Button></>:pass||<p className="loginb">Password Changed Succesfully</p>}
