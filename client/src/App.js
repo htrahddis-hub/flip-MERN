@@ -9,16 +9,19 @@ import { BrowserRouter,Route,Routes,Navigate } from "react-router-dom";
 import {authorize} from './api';
 
 function App() {
+
   const [user,setUser]=React.useState('');
+  
   React.useEffect(()=>{(async()=>{
     const data= await authorize();
-    console.log(data);
     if(data==='ok')
       setUser('valid');
-  })()},[])
+  })()},[]);
+
   const setuser=(user)=>{
     setUser('valid');
   }
+
   return (
     <div className="App">
       <BrowserRouter>

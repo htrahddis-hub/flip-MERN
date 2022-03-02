@@ -1,21 +1,24 @@
 import React from "react";
-import './producCards.css';
-
-
- // import { Card, CardTitle, CardBody, CardImg, CardText,Button } from 'reactstrap';
   
-  const Example = (prop) => {
-    const props=prop.product;
-    return (
-      <div className="card" >
-        <img className="card-img-top" src={props.imgLink} alt="not found" />
-        <div className="card-body">
-          <h5 className="card-title">{props.name}</h5>
-          <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a className="btn btn-primary" href='/'>Go somewhere</a>
+const Example = (prop) => {
+  const props=prop.product;
+  return (
+    <div class="col-3 ">
+      <div class="card text-black m-1">
+        <img src={props.imgLink} class="card-img-top" alt="Apple Computer"/>
+        <div class="card-body">
+          <div class="text-center">
+            <h5 class="card-title">Believing is seeing</h5>
+            <p class="text-muted mb-1">{props.name}</p>
+          </div>
+          <div class="d-flex justify-content-between total font-weight-bold mb-4">
+            <span>Total</span><span>${props.price}</span>
+          </div>
+          <button type="button" class="btn btn-success flex-fill ms-1">Buy now</button>
         </div>
       </div>
+    </div>
     );
   };
-  
+
   export default Example;

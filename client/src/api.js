@@ -1,12 +1,12 @@
 import axios from 'axios';
 
-const url="https://data-and-auth-api.herokuapp.com/auth/";
+const url="http://localhost:5000/auth/";
+// const url="https://data-and-auth-api.herokuapp.com/auth/";
 
 
 export const signup= async(user)=>{
 	try{
 		const {data}=await axios.post(url+'signup',user);
-		console.log(data);
 		if(data.message==="Signup successful")
 			return 'ok';
 	}
@@ -35,7 +35,6 @@ export const login= async(user)=>{
 export const authorize= async()=>{
 	try{
 		let token=decodeURIComponent(document.cookie);
-    console.log(token);
 		token={secret_token: token.substring(6)};
 		const {data}=await axios.post(url+'verify',token);
 		if(data.message==='ok')
