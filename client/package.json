@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@reduxjs/toolkit": "^1.8.0",
     "@testing-library/jest-dom": "^5.16.0",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
@@ -13,10 +14,7 @@
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.0.2",
     "react-scripts": "^5.0.0",
-    "reactstrap": "^9.0.1",
-    "redux": "^4.1.2",
-    "redux-thunk": "^2.4.1",
-    "web-vitals": "^1.1.2"
+    "reactstrap": "^9.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
