@@ -1,19 +1,24 @@
-import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE } from "../constants/actionTypes";
+import { createSlice } from "@reduxjs/toolkit";
 
-const postReducer = (posts = [],action) => {
-	switch(action.type){
-		case DELETE:
-		    return posts.filter((post) => post._id !== action.payload);
-		case UPDATE:
-		case LIKE:
-		    return posts.map((post) => post._id === action.payload._id ? action.payload : post);
-		case FETCH_ALL:
-			return action.payload.reverse();
-		case CREATE:
-			return [action.payload, ...posts];
-		default:
-		    return posts;
-	}
-}
+const initialState = {
+  value: {
+		products:[]
+  },
+  status: "idle",
+};
 
-export default postReducer;
+const productSlice = createSlice({
+  name: "products",
+  initialState,
+  reducers: {
+    Fetch: (state, action) => {
+      state.value = action.payload;
+    },
+  },
+});
+
+export const { Fetch } = productSlice.actions;
+
+export const getProducts = (state) => state.user.value;
+
+export default productSlice.reducer;

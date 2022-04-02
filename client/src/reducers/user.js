@@ -1,17 +1,34 @@
-import { LOGIN, AUTHORIZE, SIGNUP, FORGOTPASSWORD, RESETPASSWORD } from "../constants/actionTypes";
+import { createSlice } from "@reduxjs/toolkit";
 
-const userReducer = (user = {},action) => {
-	switch(action.type){
-		case LOGIN:
-        case AUTHORIZE:
-            return action.payload;
-		case SIGNUP:
-		case FORGOTPASSWORD:
-		case RESETPASSWORD:
-		    return user;
-		default:
-		    return user;
-	}
-}
+const initialState = {
+  value: {
+    auth: false,
+    user: "",
+  },
+  status: "idle",
+};
 
-export default userReducer;
+const userSlice = createSlice({
+  name: "user",
+  initialState,
+  reducers: {
+    Authorize: (state, action) => {
+      state.value = action.payload;
+    },
+    Login: (state, action) => {
+      state.value = action.payload;
+    },
+    Logout: (state) => {
+      state.value = {
+        auth: false,
+        user: "",
+      };
+    },
+  },
+});
+
+export const { Authorize, Login, Logout } = userSlice.actions;
+
+export const getUser = (state) => state.user.value;
+
+export default userSlice.reducer;
