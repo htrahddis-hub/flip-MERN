@@ -26,7 +26,7 @@ const Login= (props) =>{
 
 	const handleSubmit= async (event)=>{
 		event.preventDefault();
-		console.log(user);
+		//console.log(user);
 		const message=await login(user);
 		if(message==='ok')
 			props.setUser({...user,auth:true});

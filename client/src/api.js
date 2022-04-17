@@ -1,9 +1,9 @@
 import axios from "axios";
-import { useSelector, useDispatch } from "react-redux";
-import { Authorize, Login, Logout, getUser } from "./reducers/user";
+// import { useSelector, useDispatch } from "react-redux";
+// import { Authorize, Login, Logout, getUser } from "./reducers/user";
 
-const url = "http://localhost:5000/auth/";
-// const url="https://data-and-auth-api.herokuapp.com/auth/";
+//const url = "http://localhost:5000/auth/";
+const url="https://data-and-auth-api.herokuapp.com/auth/";
 
 export const signup = async (user) => {
   try {
