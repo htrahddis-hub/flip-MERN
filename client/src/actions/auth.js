@@ -62,3 +62,12 @@ export const resetPassword = createAsyncThunk(
     }
   }
 );
+
+export const logout = createAsyncThunk("user/logout", async () => {
+  try {
+    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    return { auth: false, user: "" };
+  } catch (err) {
+    console.log(err);
+  }
+});

@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require("dotenv");
 const passport = require('passport');
-const routes = require('./auth/routes/routes');
+const routes = require('./routes/routes');
 const cookieParser = require("cookie-parser");
 
 require('./auth/auth');
@@ -15,12 +15,13 @@ dotenv.config();
 app.use(bodyParser.json({ limit: "30mb", extended: true}));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true}));
 app.use(cookieParser());
-app.use(cors({origin:'http://localhost:3000',credentials: true}));
+app.use(cors({origin:'https://ecomm16.netlify.app',credentials: true}));
+//app.use(cors({origin:'http://localhost:3000',credentials: true}));
 app.use(passport.initialize());
 const UserModel = require('./model/userAuth');
 app.use('/auth/',routes);
 
-const secureRoute = require('./auth/routes/secure-routes');
+const secureRoute = require('./routes/product-routes');
 app.use('/user/', secureRoute);
 
 app.use(function(err, req, res, next) {

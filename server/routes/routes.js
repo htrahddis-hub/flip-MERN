@@ -1,7 +1,7 @@
 const express = require('express');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
-const UserModel = require('../../model/userAuth');
+const UserModel = require('../model/userAuth');
 const { totp } =require('otplib');
 const nodemailer = require("nodemailer");
 var CryptoJS = require("crypto-js");
@@ -84,7 +84,7 @@ router.post('/fpwd',async (req,res,next)=>{
       });
         
     let mailDetails = {
-        from: 'no-reply siddharthecomapp@gmail.com',
+         from: 'no-reply siddharthecomapp@gmail.com',
         to: email,
         subject: 'Password Change',
         html: html 
@@ -108,7 +108,8 @@ router.post('/rpwd', async(req,res,next)=>{
       if(isValid){
         const user = await UserModel.findOne({ email });
         if (!user) return res.json({ message: 'invalid email ID'});
-        user.password = password;
+        const pwd = await bcrypt.hash(password, 10);
+        user.password = pwd;
         await user.save();
         return res.status(200).json({message:"verfied"});
       }
@@ -135,9 +136,9 @@ router.post('/verify', async (req,res,next)=>{
         user: decoded.user.email,
       });
     }
-    else res.json({message:"invalid-token"});
+    else res.status(401).json({message:"invalid-token"});
   }catch(error){
-    res.status(500).json({message:"invalid token",error:error});
+    res.status(401).json({message:"invalid token",error:error});
   }
 });
 

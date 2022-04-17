@@ -1,11 +1,10 @@
 const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
 const UserModel = require('../model/userAuth');
-// const JWTstrategy = require('passport-jwt').Strategy;
-// const ExtractJWT = require('passport-jwt').ExtractJwt;
 var AES = require("crypto-js/aes");
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+
 require('dotenv').config();
 
 passport.use(
@@ -63,4 +62,5 @@ passport.use(
     }
   )
 );
+
 

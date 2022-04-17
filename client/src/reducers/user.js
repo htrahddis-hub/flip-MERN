@@ -1,5 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { signup, login, authorize } from "../actions/auth";
+import {
+  signup,
+  login,
+  authorize,
+  resetPassword,
+  forgotPassword,
+  logout,
+} from "../actions/auth";
 
 const initialState = {
   value: {
@@ -12,20 +19,7 @@ const initialState = {
 const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {
-    Authorize: (state, action) => {
-      state.value = action.payload;
-    },
-    Login: (state, action) => {
-      state.value = action.payload;
-    },
-    Logout: (state) => {
-      state.value = {
-        auth: false,
-        user: "",
-      };
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(signup.fulfilled, (state, action) => {
       state.value = action.payload;
@@ -33,8 +27,17 @@ const userSlice = createSlice({
     builder.addCase(login.fulfilled, (state, action) => {
       state.value = action.payload;
     });
-    builder.addCase(authorize.fulfilled,(state, action)=>{
-      state.value=action.payload;
+    builder.addCase(authorize.fulfilled, (state, action) => {
+      state.value = action.payload;
+    });
+    builder.addCase(resetPassword.fulfilled, (state, action) => {
+      state.value = action.payload;
+    });
+    builder.addCase(forgotPassword.fulfilled, (state, action) => {
+      state.value = action.value;
+    });
+    builder.addCase(logout.fulfilled, (state, action) => {
+      state.value = action.payload;
     });
   },
 });
