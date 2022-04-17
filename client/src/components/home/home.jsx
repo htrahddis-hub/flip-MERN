@@ -1,13 +1,18 @@
 import React from "react";
 import Product from "../products/products";
 import "./home.css";
+import { logout } from "../../api";
 
 const Home = (props) => {
+  const handleLogout = () => {
+    logout();
+    props.setUser("");
+  };
   return (
     <div>
       <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
         <div class="container-fluid">
-          <a class="navbar-brand mb-0 h1" href="#">
+          <a class="navbar-brand mb-0 h1" href="/">
             Navbar
           </a>
           <button
@@ -22,7 +27,7 @@ const Home = (props) => {
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <form class="d-flex mx-auto me-auto-sm pe-5">
+            <form class="d-flex mx-auto me-sm-auto pe-5">
               <input
                 class="form-control me-2 boxWid"
                 type="search"
@@ -34,7 +39,14 @@ const Home = (props) => {
               </button>
             </form>
             <button
-              class="d-flex btn btn-primary mt-2-sm"
+              class="d-flex btn btn-outline-warning me-2 mt-sm-0 mt-2"
+              type="submit"
+              onClick={handleLogout}
+            >
+              Logout
+            </button>
+            <button
+              class="d-flex btn btn-primary mt-sm-0 mt-2"
               type="button"
               data-bs-toggle="offcanvas"
               data-bs-target="#offcanvasExample"

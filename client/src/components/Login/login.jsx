@@ -68,11 +68,11 @@ const Login= (props) =>{
       			</Label>
     			</FormGroup>
 				{unauth? <p className="unauth">{unauth}</p>:<p></p>}
-				<p className="fpwd"><a href='/forgotpassword'>Forgot password?</a></p>
-    			<Button onClick={handleSubmit} >
+				<p className="fpwd "><a href='/forgotpassword'>Forgot password?</a></p>
+    			<Button color="primary" className="mt-2"outline onClick={handleSubmit} >
       			Login
     			</Button>
-					<Button className="pads" href="/Signup">
+					<Button color="primary" className="ms-5 mt-2" href="/Signup">
       			New user?
     			</Button>
 					

@@ -83,7 +83,7 @@ const Signup = () => {
             </p>
           )}
           {err === " " || <p className="error">{err}</p>}
-          <Button onClick={handleSubmit}>Signup</Button>
+          <Button color="primary"onClick={handleSubmit}>Signup</Button>
           <p className="acc">
             Have an account? <a href="/Login">login</a>
           </p>
