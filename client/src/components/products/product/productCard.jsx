@@ -2,18 +2,24 @@ import React from "react";
   
 const Example = (prop) => {
   const props=prop.product;
+
+  const handleClick= (event)=>{
+    prop.callBack(props._id);
+  };
+
   return (
-    <div class="col-lg-3 col-md-4 col-sm-4 col-6" >
-      <div class="card text-black m-1" style={{maxHeight:"400px"}}>
-        <img src={props.imgLink} class="card-img-top" alt="Apple Computer" height='150px' width='80px'/>
-        <div class="card-body">
-          <div class="text-center">
-            <p class="text-muted ">{props.name}</p>
+    <div className="col-lg-3 col-md-4 col-sm-4 col-6 my-2" >
+      <div className="card text-black m-1 h-100" style={{maxHeight:"500px"}}>
+        <img src={props.productImage[0]} className="p-2" alt="Apple Computer" />
+        <div className="p-2 mt-auto ">
+          <div className="text-center">
+            <p className="text h5 mb-1">{props.name}</p>
           </div>
-          <div class="d-flex justify-content-between total font-weight-bold mb-2">
-            <span>Total</span><span>${props.price}</span>
+          <p className="text-disabled text-center mb-3 mx-5">{props.description}</p>
+          <div className="d-flex justify-content-between">
+          <p className="h5 bg-light m-0 p-2 rounded">${props.price}</p>
+            <button type="button" className="btn btn-success" onClick={handleClick}>Buy now</button>
           </div>
-          <button type="button" class="btn btn-success flex-fill ">{"Buy now"+prop.num}</button>
         </div>
       </div>
     </div>

@@ -2,8 +2,9 @@ import axios from "axios";
 // import { useSelector, useDispatch } from "react-redux";
 // import { Authorize, Login, Logout, getUser } from "./reducers/user";
 
-//const url = "http://localhost:5000/auth/";
-const url="https://data-and-auth-api.herokuapp.com/auth/";
+const url = "http://localhost:5000/auth/";
+//const url="https://data-and-auth-api.herokuapp.com/auth/";
+const url2="http://localhost:5000/user/";
 
 export const signup = async (user) => {
   try {
@@ -66,3 +67,15 @@ export const resetPassword = async (user) => {
     return err.response.data.message;
   }
 };
+
+export const getProduct =async()=>{
+  try{
+    let token = decodeURIComponent(document.cookie);
+    token = { secret_token: token.substring(6) };
+    const product = await axios.post(url2+"products",token);
+    //console.log(product);
+    return product.data.product;
+  } catch(err){
+    return err.response.data.message;
+  }
+}
