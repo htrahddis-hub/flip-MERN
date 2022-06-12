@@ -30,8 +30,7 @@ const Login = (props) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const x= await dispatch(login(user));
-    console.log(x);
+    dispatch(login(user));
     if (!User.auth) {
       setUnauth(true);
     }
@@ -63,7 +62,7 @@ const Login = (props) => {
               value={user.email}
               onChange={handleChange}
             />
-            <Label for="exampleEmail">Email</Label>
+            <Label htmlFor="exampleEmail">Email</Label>
           </FormGroup>
           <FormGroup floating>
             <Input
@@ -74,7 +73,7 @@ const Login = (props) => {
               value={user.password}
               onChange={handleChange}
             />
-            <Label for="examplePassword">Password</Label>
+            <Label htmlFor="examplePassword">Password</Label>
           </FormGroup>
           {unauth ? <p className="unauth">{User.message}</p> : <p></p>}
           <div className="row mb-4">
@@ -86,7 +85,7 @@ const Login = (props) => {
                   value=""
                   id="form2Example34"
                 />
-                <label className="form-check-label" for="form2Example34">
+                <label className="form-check-label" htmlFor="form2Example34">
                   {" "}
                   Remember me{" "}
                 </label>
