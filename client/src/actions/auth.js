@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-const url = "http://localhost:5000/auth/";
+const url = "https://data-and-auth-api.herokuapp.com/auth/";
 
 export const signup = createAsyncThunk("user/signup", async (user) => {
   try {

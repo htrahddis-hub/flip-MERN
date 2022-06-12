@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-const url = "https://data-and-auth-api.herokuapp.com/auth/";
+const url = "https://data-and-auth-api.herokuapp.com/user/";
 
 const getToken = () => {
   let token = decodeURIComponent(document.cookie);
