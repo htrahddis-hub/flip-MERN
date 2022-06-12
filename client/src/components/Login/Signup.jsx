@@ -3,16 +3,20 @@ import "./Signup.css";
 import { Form, FormGroup, Input, Label, Button } from "reactstrap";
 import { useLocation } from "react-router-dom";
 import Navbar from "../partials/navbar";
-import { signup } from "../../api";
+import { useDispatch, useSelector } from "react-redux";
+import { signup } from "../../actions/auth";
+import { getUser } from "../../reducers/user";
 
 const Signup = () => {
+  const dispatch = useDispatch();
+  const User = useSelector(getUser);
   const [user, setUser] = React.useState({
     email: "",
     password: "",
     confirmPassword: "",
   });
-  const [err, setErr] = React.useState(" ");
-  const [log, setLog] = React.useState(true);
+  const [err, setErr] = React.useState("");
+
   const handleChange = (event) => {
     setErr(true);
     const { name, value } = event.target;
@@ -27,9 +31,8 @@ const Signup = () => {
   const handleSubmit = async (event) => {
     if (user.password === user.confirmPassword) {
       event.preventDefault();
-      const flag = await signup({ email: user.email, password: user.password });
-      if (flag.auth) setLog(false);
-      else setErr("This E-mail id is already registered");
+      dispatch(signup({ email: user.email, password: user.password }));
+
       setUser({
         email: "",
         password: "",
@@ -77,13 +80,18 @@ const Signup = () => {
             />
             <Label for="confirmPassword">Confirm Password</Label>
           </FormGroup>
-          {log || (
+          {User.isSignedin ? (
             <p className="error">
               Thanks for signing up!! login <a href="/Login">here</a>
             </p>
+          ) : (
+            <p className="error">{err}{User.user}{'\n'}{User.message}</p>
           )}
-          {err === " " || <p className="error">{err}</p>}
-          <Button color="primary"onClick={handleSubmit}>Signup</Button>
+          <div className="d-grid gap-2 pt-3">
+            <Button color="primary" onClick={handleSubmit}>
+              Create an Account
+            </Button>
+          </div>
           <p className="acc">
             Have an account? <a href="/Login">login</a>
           </p>

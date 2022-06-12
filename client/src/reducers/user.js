@@ -34,7 +34,7 @@ const userSlice = createSlice({
       state.value = action.payload;
     });
     builder.addCase(forgotPassword.fulfilled, (state, action) => {
-      state.value = action.value;
+      state.value = action.payload;
     });
     builder.addCase(logout.fulfilled, (state, action) => {
       state.value = action.payload;
