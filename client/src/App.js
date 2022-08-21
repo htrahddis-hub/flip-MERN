@@ -5,6 +5,7 @@ import Signup from "./components/Login/Signup";
 import Home from "./components/home/home";
 import Cart from "./components/cart/cart";
 import Forgotpassword from "./components/Login/Forgotpassword";
+import Checkout from "./components/cart/checkout";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { authorize } from "./actions/auth";
@@ -34,6 +35,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/forgotpassword" element={<Forgotpassword />} />
           <Route path="/cart" element={<Cart/>} />
+          <Route path="/checkout" element={<Checkout/>} />
         </Routes>
       </BrowserRouter>
     </div>

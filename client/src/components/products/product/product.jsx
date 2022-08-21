@@ -13,19 +13,19 @@ const Product = (prop) => {
     prop.modal(props);
   }
   return (
-    <div className="col-lg-3 col-md-4 col-sm-4 col-6 my-2">
-      <div className="card text-black m-1 h-100" style={{ maxHeight: "450px" ,minHeight:"400px"}}>
+    <div className=" col-lg-3 col-md-4 col-sm-4 col-6 my-2">
+      <div className=" shadow border-0 card text-black" style={{ height: "420px"}}>
         <img
           src={props.productImage[0]}
           className="px-4 px-xl-5 my-auto"
           style={{ maxHeight: "200px" }}
           alt="Apple Computer"
         />
-        <div className="p-2 mt-auto ">
+        <div className="p-2 ">
           <div className="text-center">
             <p className="text h5 mb-1">{props.name}</p>
           </div>
-          <p className="text-disabled text-center mb-3 mx-5">
+          <p className="text-disabled text-center mb-2">
             {props.description.substring(0, 20)}...
           </p>
           <div className="d-flex justify-content-center mb-2">
@@ -35,7 +35,7 @@ const Product = (prop) => {
               onClick={callModal}
               style={{ color: "blue" }}
             >
-              leave a review?
+              add a review?
             </button>
           </div>
           <div className="d-flex justify-content-between">
