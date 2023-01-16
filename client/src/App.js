@@ -6,6 +6,9 @@ import Home from "./components/home/home";
 import Cart from "./components/cart/cart";
 import Forgotpassword from "./components/Login/Forgotpassword";
 import Checkout from "./components/cart/checkout";
+import Choose from "./components/choose/choose";
+import AddProduct from "./components/seller/form";
+import Success from "./components/cart/success";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { authorize } from "./actions/auth";
@@ -30,12 +33,23 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={user.auth ? <Home user={user.user} /> : <Navigate to="/login" />} />
-          <Route path="/login" element={user.auth ? <Navigate to="/" /> : <Login />} />
+          <Route
+            path="/"
+            element={
+              user.auth ? <Home user={user.user} /> : <Navigate to="/login" />
+            }
+          />
+          <Route
+            path="/login"
+            element={user.auth ? <Navigate to="/" /> : <Login />}
+          />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/choose" element={<Choose />} />
+          <Route path="/addproduct" element={<AddProduct />} />
           <Route path="/forgotpassword" element={<Forgotpassword />} />
-          <Route path="/cart" element={<Cart/>} />
-          <Route path="/checkout" element={<Checkout/>} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/success" element={<Success />} />
         </Routes>
       </BrowserRouter>
     </div>

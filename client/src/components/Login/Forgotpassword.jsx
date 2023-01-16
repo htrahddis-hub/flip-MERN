@@ -18,7 +18,7 @@ const Signup = () => {
   });
 
   const [flag, setFlag] = React.useState({
-    send: true,
+    send: false,
     match: true,
     success: false,
     err: false,
@@ -33,7 +33,7 @@ const Signup = () => {
       setFlag((prevUser) => {
         return {
           ...prevUser,
-          send: true,
+          send: false,
         };
       });
       setData((prevUser) => {
@@ -54,20 +54,19 @@ const Signup = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const res=await dispatch(forgotPassword({ email: data.email }));
-    if(res.payload.auth){
+    const res= await dispatch(forgotPassword({ email: data.email }));
+    if(res.payload.otpSend){
       setFlag((prevUser) => {
         return {
           ...prevUser,
-          send: false,
+          send: true,
         };
       });
+      console.log("here");
     }
     else{
-      console.log("bye");
-      
+      console.log("bye"); 
     }
-    
   };
 
   const handleResetPassword = async (event) => {
@@ -107,7 +106,7 @@ const Signup = () => {
             <Label for="exampleEmail">Email</Label>
           </FormGroup>
           {!User.otpSend && <p className="logina">{message}</p>}
-          {flag.send ? (
+          {!(flag.send) ? (
             <div className="d-grid gap-2 ">
               <Button color="primary" className="space" onClick={handleSubmit}>
                 Send OTP

@@ -1,0 +1,10 @@
+.classhover:hover{
+  box-shadow: 0 0 10px rgb(175, 174, 174);
+  border-width: 2px;
+}
+.change{
+  font-size: 5.5vh;
+}
+.changep{
+  font-size: 3.4vh;
+}

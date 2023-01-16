@@ -1,0 +1,17 @@
+.change{
+    font-size: 4.5vh;
+    font-weight: 500;
+}
+.changep{
+    font-size: 3.4vh;
+    font-weight: 500;
+}
+.changewhole{
+    margin-bottom: 1px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+.highlight{
+    font-size: 3.5vh;
+    border-bottom: solid 3px;
+}

@@ -174,13 +174,15 @@ const Cart = (prop) => {
                           </h5>
                         </div>
 
-                        <button
-                          type="button"
-                          className="btn btn-dark btn-block btn-lg"
-                          data-mdb-ripple-color="dark"
-                        >
-                          Pay
-                        </button>
+                        <Link to="/checkout">
+                          <button
+                            type="button"
+                            className="btn btn-dark btn-block btn-lg"
+                            data-mdb-ripple-color="dark"
+                          >
+                            Pay
+                          </button>
+                        </Link>
                       </div>
                     </div>
                   </div>

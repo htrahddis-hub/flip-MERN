@@ -18,7 +18,7 @@ const Product = (prop) => {
         <img
           src={props.productImage[0]}
           className="px-4 px-xl-5 my-auto"
-          style={{ maxHeight: "200px" }}
+          // style={{ maxHeight: "200px" }}
           alt="Apple Computer"
         />
         <div className="p-2 ">

@@ -3,7 +3,6 @@ import "./login.css";
 import { Form, FormGroup, Input, Label } from "reactstrap";
 import Navbar from "../partials/navbar";
 import { useLocation,Link } from "react-router-dom";
-// import { login } from "../../api";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../actions/auth";
 import { getUser } from "../../reducers/user";

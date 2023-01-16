@@ -35,22 +35,19 @@ const NavBar = (props) => {
                 <b>Home</b>
               </NavLink>
             </NavItem>
-            {props.user !== "valid" ? (
-              <NavItem>
-                <NavLink
-                  className={path === "/Login" ? "highlight" : "changep"}
-                  href="/Login"
-                >
-                  Login
-                </NavLink>
-              </NavItem>
-            ) : (
-              <NavItem>
-                <NavLink className="changep" onClick={handleSubmit} href="/">
-                  Logout
-                </NavLink>
-              </NavItem>
-            )}
+            <NavItem>
+              <NavLink
+                className={path === "/addproduct" ? "highlight" : "changep"}
+                href="/addproduct"
+              >
+                <b>Add Product</b>
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink className="changep" onClick={handleSubmit} href="/">
+                Logout
+              </NavLink>
+            </NavItem>
           </Nav>
         </Collapse>
       </Navbar>
